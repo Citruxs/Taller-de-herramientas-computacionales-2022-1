@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage[spanish,mexico]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+\usepackage{lipsum}
+\usepackage[dvipsnames]{xcolor}
+
+% Opciones para los encabezados y pies de pagina
+\pagestyle{fancy}
+%\fancyhead[L]{\small \textsl{Taller de herramientas computacionales}}
+\fancyhead[L]{\small \textsl{\nouppercase{\leftmark}}}
+\fancyhead[R]{\small \textsl{Semestre 2021-1}}
+
+% Ajuste de los hipervinculos
+\hypersetup{
+    colorlinks=true,
+    linkcolor=MidnightBlue,
+    filecolor=Maroon,      
+    urlcolor=OliveGreen,
+    citecolor = Maroon
+}
+
+% Informacion del documento
+\title{Ejemplo 11}
+\author{Jorge Zavaleta}
+\date{Octubre 2021}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Hipervínculos}
+
+Los \textcolor{BrickRed}{\bf hipervínculos} se manejan a través del paquete \texttt{hyperref}. Para revisar ejemplos de su uso e información del paquete puede consultar \href{https://www.overleaf.com/learn/latex/Hyperlinks}{Overleaf}.
+
+\textcolor{Gray}{\lipsum[1-2]}
+
+\section{Colores}
+
+Los \textcolor{BrickRed}{\bf colores} se pueden manejar a través del paquete \texttt{xcolor}. Para revisar ejemplos de su uso e información del paquete puede consultar \href{https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX}{Overleaf}.
+
+\textcolor{Gray}{\lipsum[1-4]\lipsum[5][1-7]}
+
+\section{Encabezados y pies de página}
+
+Los \textcolor{BrickRed}{\bf encabezados} y \textcolor{BrickRed}{\bf pies de página} se pueden modificar fácilmente mediante el paquete \texttt{fancyhdr}. Para revisar ejemplos de su uso e información del paquete puede consultar \href{https://www.overleaf.com/learn/latex/Headers_and_footers}{Overleaf}.
+
+\textcolor{Gray}{\lipsum[1-4]\lipsum[5][1-7]}
+
+\section{Bibliografía}
+
+La forma más fácil de incorporar la bibliografía a un documento en \LaTeX{} es miediante el ambiente \texttt{thebibliography}. La documentación en Overleaf \cite{Overleaf} es muy completa debido a que tiene ejemplos que se pueden compilar desde su plataforma.
+
+\textcolor{Gray}{\lipsum[1-5]}
+
+\addcontentsline{toc}{section}{Referencias}
+\begin{thebibliography}{99}
+\bibitem{Ref1} Nombre del autor. \textit{Titulo de la referencias}. Datos de la referencia.
+\bibitem{Ref2} Nombre del autor. \textit{Titulo de la referencias}. Datos de la referencia.
+\bibitem{Overleaf} \textit{\href{https://www.overleaf.com/learn/latex/Main_Page}{Documentación} de Overleaf}. 
+
+\end{thebibliography}
+
+\end{document}

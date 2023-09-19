@@ -1,0 +1,13 @@
+\babel@toc {spanish}{}
+\contentsline {part}{I\hspace {1em}Tipos de letra}{2}{}%
+\contentsline {paragraph}{Italicas}{3}{}%
+\contentsline {paragraph}{Máquina}{3}{}%
+\contentsline {paragraph}{Negritas}{3}{}%
+\contentsline {part}{II\hspace {1em}Tamaños de letra}{4}{}%
+\contentsline {paragraph}{\tiny {Tiny}}{5}{}%
+\contentsline {paragraph}{\Large {Large}}{5}{}%
+\contentsline {paragraph}{\Huge {Huge}}{5}{}%
+\contentsline {part}{III\hspace {1em}Alineación de texto}{7}{}%
+\contentsline {paragraph}{A la izquierda}{8}{}%
+\contentsline {paragraph}{Centrado}{8}{}%
+\contentsline {paragraph}{A la derecha}{8}{}%

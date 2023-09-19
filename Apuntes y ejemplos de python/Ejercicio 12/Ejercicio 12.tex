@@ -1,0 +1,37 @@
+\documentclass[12pt,letterpaper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\author{Andrés Limón Cruz }
+\begin{document}
+E1. Grafique en 3D la superficie de la función
+$$
+f(x,y) = \dfrac{\sin(\sqrt{x^2+y^2})}{\sqrt{x^2+y^2}}
+$$
+en el dominio -10 $\leq$ $x,y$ $\leq$ 10.\\
+
+E2. Haga un script que pida al usuario la expresión de una función $f(x)$. Usando la expresión para $f(x)$ calcule su derivada y haga la grafica de $f(x)$ y $f'(x)$ en los mismos ejes. Para hacer el calculo de la derivada utilice el calculo simbólico. Para la gráfica es necesario que utilice diferentes estilos para las curvas de la función y su derivada, además de poner etiquetas a los ejes y una leyenda. También se debe pedir al usuario el intervalo de graficación y el número de puntos utilizados para gráficar.\\
+
+E3. La manera de hacer gráficas en coordenadas polares con matplolib es usar la función polar de pyplot. La función polar recibe como argumentos de entrada el ángulo y el radio. Por ejemplo, para graficar la curva cardioide cuya ecuación en coordenadas polares esta dada por
+$$
+r( \theta) = a(1+ \cos \theta )
+$$
+donde $\theta$ es el ángulo y $a > 0$\\
+Considerela ecuación para la rosa polar en coordenadas polares
+$$
+r( \theta) = \left| a \sin \left( \frac{k}{2} \theta + \phi \right) \right|
+$$
+Utilizando esa ecuación, cree una función que haga la gráfica de esta curva. Como nombre de la función use rosaPolar y como argumentos de entrada:
+\begin{itemize}
+\item a(float), define la longitud de los pétalos
+\item k(float), define el número de pétalos
+\item phi(float), define un ángulo de rotación $\phi$
+\item lim(float), define el intervalo para el ángulo $\theta$, esto es, 0 $\leq ~ \theta ~ \leq$ lim
+\item p(int), define el número de puntos a utilizar para dibujar la gráfica
+\end{itemize}
+La función solo hace la gráfica en coordenadas polares, no regresa ningún valor u objeto.\\
+Después haga un script para pedir al usuario los valores de los argumentos de entrada de la función rosaPolar. Pida el ángulo de rotación phi en grados en lugar de radianes. Use el manejo de excepciones para mandar un mensaje al usuario cuando haya cometido un error al definir los valores, esto para evitar la interrupción del script
+\end{document}

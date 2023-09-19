@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage[spanish,mexico]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+
+\title{Ejemplo 3}
+\author{Jorge Zavaleta }
+\date{Septiembre 2021}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\begin{abstract}
+    En este ejemplo se mostrará el formato básico de un documento en \LaTeX{}. Los detalles y referencias lo pueden revisar en las notas, tema 1-3.
+\end{abstract}
+
+\section{Saltos de línea}
+
+Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
+Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
+
+\subsection{Forma 1}
+Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
+
+Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
+
+\subsection{Forma 2}
+Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto\\
+
+Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
+
+
+\subsection{Forma 3}
+Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto\newline
+
+Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto 
+\newpage
+\section{Tipos de letra}
+
+\textit{\lipsum[1]}
+
+\textit{Texto} texto {\sl texto} texto \texttt{texto texto} texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
+
+\section{Tamaños de letra}
+
+{\tiny \lipsum[2]}
+
+{\Huge Texto} texto {\scriptsize texto} texto texto {\large texto texto texto} texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
+
+\section{Alineación}
+
+\begin{center}
+    \lipsum[3]
+\end{center}
+
+{
+    \centering
+    \lipsum[6]
+}
+
+\section{Combinación}
+
+\begin{flushleft}
+    {\large \underline{\bf Primer párrafo}}. \lipsum[1]
+\end{flushleft}
+
+\end{document}

@@ -1,0 +1,690 @@
+\documentclass[11pt]{report}
+\usepackage[spanish]{babel}
+    \usepackage[breakable]{tcolorbox}
+    \usepackage{parskip} % Stop auto-indenting (to mimic markdown behaviour)
+    
+    \usepackage{iftex}
+    \ifPDFTeX
+    	\usepackage[T1]{fontenc}
+    	\usepackage{mathpazo}
+    \else
+    	\usepackage{fontspec}
+    \fi
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % Maintain compatibility with old templates. Remove in nbconvert 6.0
+    \let\Oldincludegraphics\includegraphics
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionFormat{nocaption}{}
+    \captionsetup{format=nocaption,aboveskip=0pt,belowskip=0pt}
+
+    \usepackage{float}
+    \floatplacement{figure}{H} % forces figures to be placed at the correct location
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range
+    \makeatletter % fix for old versions of grffile with XeLaTeX
+    \@ifpackagelater{grffile}{2019/11/01}
+    {
+      % Do nothing on new versions
+    }
+    {
+      \def\Gread@@xetex#1{%
+        \IfFileExists{"\Gin@base".bb}%
+        {\Gread@eps{\Gin@base.bb}}%
+        {\Gread@@xetex@aux#1}%
+      }
+    }
+    \makeatother
+    \usepackage[Export]{adjustbox} % Used to constrain images to a maximum size
+    \adjustboxset{max size={0.9\linewidth}{0.9\paperheight}}
+
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    % The default LaTeX title has an obnoxious amount of whitespace. By default,
+    % titling removes some of it. It also provides customization options.
+    \usepackage{titling}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    \usepackage{mathrsfs}
+    
+
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+    \definecolor{ansi-default-inverse-fg}{HTML}{FFFFFF}
+    \definecolor{ansi-default-inverse-bg}{HTML}{000000}
+
+    % common color for the border for error outputs.
+    \definecolor{outerrorbackground}{HTML}{FFDFDF}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatibility definitions
+    \def\gt{>}
+    \def\lt{<}
+    \let\Oldtex\TeX
+    \let\Oldlatex\LaTeX
+    \renewcommand{\TeX}{\textrm{\Oldtex}}
+    \renewcommand{\LaTeX}{\textrm{\Oldlatex}}
+    % Document parameters
+    % Document title
+    \title{Práctica 2\\Taller de herramientas computacionales}
+    
+    
+    
+    
+    
+% Pygments definitions
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\@namedef{PY@tok@w}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\@namedef{PY@tok@c}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@cp}{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\@namedef{PY@tok@k}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kt}{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\@namedef{PY@tok@o}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ow}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@nb}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nf}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@nn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@ne}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\@namedef{PY@tok@nv}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@no}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\@namedef{PY@tok@nl}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\@namedef{PY@tok@ni}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\@namedef{PY@tok@na}{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\@namedef{PY@tok@nt}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@nd}{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\@namedef{PY@tok@s}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sd}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@si}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\@namedef{PY@tok@se}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\@namedef{PY@tok@sr}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\@namedef{PY@tok@ss}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sx}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@m}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@gh}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gu}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\@namedef{PY@tok@gd}{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\@namedef{PY@tok@gi}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\@namedef{PY@tok@gr}{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\@namedef{PY@tok@ge}{\let\PY@it=\textit}
+\@namedef{PY@tok@gs}{\let\PY@bf=\textbf}
+\@namedef{PY@tok@gp}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\@namedef{PY@tok@go}{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\@namedef{PY@tok@gt}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\@namedef{PY@tok@err}{\def\PY@bc##1{{\setlength{\fboxsep}{\string -\fboxrule}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}}
+\@namedef{PY@tok@kc}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kd}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kn}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@kr}{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@bp}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\@namedef{PY@tok@fm}{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\@namedef{PY@tok@vc}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vg}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vi}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@vm}{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\@namedef{PY@tok@sa}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sb}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sc}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@dl}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s2}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@sh}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@s1}{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\@namedef{PY@tok@mb}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mf}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mh}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mi}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@il}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@mo}{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\@namedef{PY@tok@ch}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@cm}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@cpf}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@c1}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\@namedef{PY@tok@cs}{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % For linebreaks inside Verbatim environment from package fancyvrb. 
+    \makeatletter
+        \newbox\Wrappedcontinuationbox 
+        \newbox\Wrappedvisiblespacebox 
+        \newcommand*\Wrappedvisiblespace {\textcolor{red}{\textvisiblespace}} 
+        \newcommand*\Wrappedcontinuationsymbol {\textcolor{red}{\llap{\tiny$\m@th\hookrightarrow$}}} 
+        \newcommand*\Wrappedcontinuationindent {3ex } 
+        \newcommand*\Wrappedafterbreak {\kern\Wrappedcontinuationindent\copy\Wrappedcontinuationbox} 
+        % Take advantage of the already applied Pygments mark-up to insert 
+        % potential linebreaks for TeX processing. 
+        %        {, <, #, %, $, ' and ": go to next line. 
+        %        _, }, ^, &, >, - and ~: stay at end of broken line. 
+        % Use of \textquotesingle for straight quote. 
+        \newcommand*\Wrappedbreaksatspecials {% 
+            \def\PYGZus{\discretionary{\char`\_}{\Wrappedafterbreak}{\char`\_}}% 
+            \def\PYGZob{\discretionary{}{\Wrappedafterbreak\char`\{}{\char`\{}}% 
+            \def\PYGZcb{\discretionary{\char`\}}{\Wrappedafterbreak}{\char`\}}}% 
+            \def\PYGZca{\discretionary{\char`\^}{\Wrappedafterbreak}{\char`\^}}% 
+            \def\PYGZam{\discretionary{\char`\&}{\Wrappedafterbreak}{\char`\&}}% 
+            \def\PYGZlt{\discretionary{}{\Wrappedafterbreak\char`\<}{\char`\<}}% 
+            \def\PYGZgt{\discretionary{\char`\>}{\Wrappedafterbreak}{\char`\>}}% 
+            \def\PYGZsh{\discretionary{}{\Wrappedafterbreak\char`\#}{\char`\#}}% 
+            \def\PYGZpc{\discretionary{}{\Wrappedafterbreak\char`\%}{\char`\%}}% 
+            \def\PYGZdl{\discretionary{}{\Wrappedafterbreak\char`\$}{\char`\$}}% 
+            \def\PYGZhy{\discretionary{\char`\-}{\Wrappedafterbreak}{\char`\-}}% 
+            \def\PYGZsq{\discretionary{}{\Wrappedafterbreak\textquotesingle}{\textquotesingle}}% 
+            \def\PYGZdq{\discretionary{}{\Wrappedafterbreak\char`\"}{\char`\"}}% 
+            \def\PYGZti{\discretionary{\char`\~}{\Wrappedafterbreak}{\char`\~}}% 
+        } 
+        % Some characters . , ; ? ! / are not pygmentized. 
+        % This macro makes them "active" and they will insert potential linebreaks 
+        \newcommand*\Wrappedbreaksatpunct {% 
+            \lccode`\~`\.\lowercase{\def~}{\discretionary{\hbox{\char`\.}}{\Wrappedafterbreak}{\hbox{\char`\.}}}% 
+            \lccode`\~`\,\lowercase{\def~}{\discretionary{\hbox{\char`\,}}{\Wrappedafterbreak}{\hbox{\char`\,}}}% 
+            \lccode`\~`\;\lowercase{\def~}{\discretionary{\hbox{\char`\;}}{\Wrappedafterbreak}{\hbox{\char`\;}}}% 
+            \lccode`\~`\:\lowercase{\def~}{\discretionary{\hbox{\char`\:}}{\Wrappedafterbreak}{\hbox{\char`\:}}}% 
+            \lccode`\~`\?\lowercase{\def~}{\discretionary{\hbox{\char`\?}}{\Wrappedafterbreak}{\hbox{\char`\?}}}% 
+            \lccode`\~`\!\lowercase{\def~}{\discretionary{\hbox{\char`\!}}{\Wrappedafterbreak}{\hbox{\char`\!}}}% 
+            \lccode`\~`\/\lowercase{\def~}{\discretionary{\hbox{\char`\/}}{\Wrappedafterbreak}{\hbox{\char`\/}}}% 
+            \catcode`\.\active
+            \catcode`\,\active 
+            \catcode`\;\active
+            \catcode`\:\active
+            \catcode`\?\active
+            \catcode`\!\active
+            \catcode`\/\active 
+            \lccode`\~`\~ 	
+        }
+    \makeatother
+
+    \let\OriginalVerbatim=\Verbatim
+    \makeatletter
+    \renewcommand{\Verbatim}[1][1]{%
+        %\parskip\z@skip
+        \sbox\Wrappedcontinuationbox {\Wrappedcontinuationsymbol}%
+        \sbox\Wrappedvisiblespacebox {\FV@SetupFont\Wrappedvisiblespace}%
+        \def\FancyVerbFormatLine ##1{\hsize\linewidth
+            \vtop{\raggedright\hyphenpenalty\z@\exhyphenpenalty\z@
+                \doublehyphendemerits\z@\finalhyphendemerits\z@
+                \strut ##1\strut}%
+        }%
+        % If the linebreak is at a space, the latter will be displayed as visible
+        % space at end of first line, and a continuation symbol starts next line.
+        % Stretch/shrink are however usually zero for typewriter font.
+        \def\FV@Space {%
+            \nobreak\hskip\z@ plus\fontdimen3\font minus\fontdimen4\font
+            \discretionary{\copy\Wrappedvisiblespacebox}{\Wrappedafterbreak}
+            {\kern\fontdimen2\font}%
+        }%
+        
+        % Allow breaks at special characters using \PYG... macros.
+        \Wrappedbreaksatspecials
+        % Breaks at punctuation characters . , ; ? ! and / need catcode=\active 	
+        \OriginalVerbatim[#1,codes*=\Wrappedbreaksatpunct]%
+    }
+    \makeatother
+
+    % Exact colors from NB
+    \definecolor{incolor}{HTML}{303F9F}
+    \definecolor{outcolor}{HTML}{D84315}
+    \definecolor{cellborder}{HTML}{CFCFCF}
+    \definecolor{cellbackground}{HTML}{F7F7F7}
+    
+    % prompt
+    \makeatletter
+    \newcommand{\boxspacing}{\kern\kvtcb@left@rule\kern\kvtcb@boxsep}
+    \makeatother
+    \newcommand{\prompt}[4]{
+        {\ttfamily\llap{{\color{#2}[#3]:\hspace{3pt}#4}}\vspace{-\baselineskip}}
+    }
+    
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+\author{Andrés Limón Cruz}
+    
+
+\begin{document}
+    
+    \maketitle
+    
+    
+
+    
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{2}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+\PY{k+kn}{import} \PY{n+nn}{math} \PY{k}{as} \PY{n+nn}{ma}
+\end{Verbatim}
+\end{tcolorbox}
+
+    E1. Evalúe las siguientes expresiones y muestre el
+resultado.\textbackslash{} \[
+a)~~ \left( \frac{7}{3}\right) ^2 * 4^3 * 18 - \dfrac{6^7}{9^3-652}~~~~~~b)~~509^\frac{1}{3} -4.5^2+ \dfrac{\ln(200)}{1.5} +75^\frac{1}{2}
+\] \[
+~~~~~~~c)~~\dfrac{24+4.5^3}{e^{4.4}-\log_{10}(12560)}~~~~~~~~~~~~~~~~~~~d)~~\dfrac{e^{\sqrt{3}}}{\sqrt[3]{0.02-3.1^2}}~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\] \[
+e)~~\cos \left( \frac{5 \pi}{6} \right) \sin^2 \left(\frac{7 \pi}{8} \right) + \dfrac{\tan \left( \frac{\pi}{6}\ln (8)\right)}{\sqrt{7} + 2}
+~~f)~~\left( \tan(64) \cos(15) \right)^2 + \dfrac{\sin^2(37)}{\cos^2(20)}
+\]
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{115}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{a1} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{7}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{4}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{18}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{6}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{7}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{9}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{652}\PY{p}{)}\PY{p}{)}
+\PY{n}{b1} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{509}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mf}{4.5}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{+}\PY{p}{(}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{200}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mf}{1.5}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{75}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n}{c1} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{l+m+mi}{24}\PY{o}{+}\PY{l+m+mf}{4.5}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{e}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{4.4}\PY{o}{\PYZhy{}}\PY{n}{ma}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{12560}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n}{d1} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{e}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{pow}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.02}\PY{o}{\PYZhy{}}\PY{l+m+mf}{3.1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n}{e1} \PY{o}{=} \PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{ma}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{7}\PY{o}{*}\PY{n}{ma}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{tan}\PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{pi}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{ma}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{7}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\PY{n}{f1} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{tan}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{)}\PY{o}{*}\PY{n}{ma}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{l+m+mi}{37}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El resultado de a) es: }\PY{l+s+si}{\PYZob{}}\PY{n}{a1}\PY{l+s+si}{:}\PY{l+s+s2}{2.4f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El resultado de b) es: }\PY{l+s+si}{\PYZob{}}\PY{n}{b1}\PY{l+s+si}{:}\PY{l+s+s2}{2.4f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El resultado de c) es: }\PY{l+s+si}{\PYZob{}}\PY{n}{c1}\PY{l+s+si}{:}\PY{l+s+s2}{2.4f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El resultado de d) es: }\PY{l+s+si}{\PYZob{}}\PY{n}{d1}\PY{l+s+si}{:}\PY{l+s+s2}{2.4f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El resultado de e) es: }\PY{l+s+si}{\PYZob{}}\PY{n}{e1}\PY{l+s+si}{:}\PY{l+s+s2}{2.4f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El resultado de f) es: }\PY{l+s+si}{\PYZob{}}\PY{n}{f1}\PY{l+s+si}{:}\PY{l+s+s2}{2.4f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El resultado de a) es: 2636.4675
+El resultado de b) es: -0.0732
+El resultado de c) es: 1.4883
+El resultado de d) es: 1.3302-2.3040j
+El resultado de e) es: 0.2846
+El resultado de f) es: 5.6682
+    \end{Verbatim}
+
+    E.2 Defina las varibales \(a,b,c\) como: \(a=-18.2\), \(b=6.42\),
+\(c=a/b\), y \(d=0.5(cb+2a)\), evalúe las siguientes expresiones y
+muestre el resultado. \[
+a)~~d-\dfrac{a+b}{c}+\dfrac{(a+d)^2}{\sqrt{\vert abc \vert}}
+~~~~~~~~~~b)~~\ln((c-d)(b-a))+ \dfrac{a+b+c+d}{a-b-c-d}
+\]
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{116}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{a} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{18.2}
+\PY{n}{b}\PY{o}{=} \PY{l+m+mf}{6.42}
+\PY{n}{c}\PY{o}{=} \PY{n}{a}\PY{o}{/}\PY{n}{b}
+\PY{n}{d}\PY{o}{=} \PY{l+m+mf}{0.5}\PY{o}{*}\PY{p}{(}\PY{n}{c}\PY{o}{*}\PY{n}{b}\PY{o}{+}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+\PY{n}{a2} \PY{o}{=} \PY{p}{(}\PY{n}{d}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{a}\PY{o}{+}\PY{n}{b}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{c}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{p}{(}\PY{n}{a}\PY{o}{+}\PY{n}{d}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{p}{(}\PY{n+nb}{abs}\PY{p}{(}\PY{n}{a}\PY{o}{*}\PY{n}{b}\PY{o}{*}\PY{n}{c}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n}{b2} \PY{o}{=} \PY{n}{ma}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{p}{(}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{n}{d}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{a}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{p}{(}\PY{n}{a}\PY{o}{+}\PY{n}{b}\PY{o}{+}\PY{n}{c}\PY{o}{+}\PY{n}{d}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{a}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{c}\PY{o}{\PYZhy{}}\PY{n}{d}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El resultado de a) es: }\PY{l+s+si}{\PYZob{}}\PY{n}{a2}\PY{l+s+si}{:}\PY{l+s+s2}{2.4f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El resultado de b) es: }\PY{l+s+si}{\PYZob{}}\PY{n}{b2}\PY{l+s+si}{:}\PY{l+s+s2}{2.4f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El resultado de a) es: 82.2946
+El resultado de b) es: -1.1995
+    \end{Verbatim}
+
+    E.3 Para el triángulo mostrado en la figura 1, \(\alpha =72\),
+\(\beta = 43\) y su perimetro es \(p=114\)mm.\textbackslash{} Defina
+\(\alpha , \beta\) y \(p\) como variables, y entonces: a) Calcule los
+lados del triángulo usando la ley de los senos \[
+Ley~de~los~senos: \dfrac{a}{\sin \alpha}= \dfrac{b}{\sin \beta}=\dfrac{c}{\sin \gamma}
+\] b) Calcule el radio \(r\) del círculo inscrito en el triángulo usando
+la fórmula \[
+r= \sqrt{\dfrac{(s-a)(s-b)(s-c)}{s}}
+\] donde \(s = (a+b+c)/2\)
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{372}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{alpha} \PY{o}{=} \PY{l+m+mi}{72}
+\PY{n}{beta} \PY{o}{=} \PY{l+m+mi}{43}
+\PY{n}{per} \PY{o}{=} \PY{l+m+mi}{114}
+\PY{n}{gamma} \PY{o}{=} \PY{l+m+mi}{180}\PY{o}{\PYZhy{}}\PY{n}{alpha}\PY{o}{\PYZhy{}}\PY{n}{beta}
+\PY{n}{a3} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{per}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{+}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{beta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{+}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{gamma}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n}{b3} \PY{o}{=} \PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{beta}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{a3}\PY{o}{/}\PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{)}\PY{p}{)} 
+\PY{n}{c3} \PY{o}{=} \PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{gamma}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{a3}\PY{o}{/}\PY{n}{ma}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{radians}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{)}\PY{p}{)} 
+
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El lado a mide: }\PY{l+s+si}{\PYZob{}}\PY{n}{a3}\PY{l+s+si}{:}\PY{l+s+s2}{2.6}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El lado b mide: }\PY{l+s+si}{\PYZob{}}\PY{n}{b3}\PY{l+s+si}{:}\PY{l+s+s2}{2.6}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El lado c mide: }\PY{l+s+si}{\PYZob{}}\PY{n}{c3}\PY{l+s+si}{:}\PY{l+s+s2}{2.6}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{c+c1}{\PYZsh{}print(a3+b3+c3)}
+\PY{n}{s} \PY{o}{=} \PY{p}{(}\PY{n}{a3}\PY{o}{+}\PY{n}{b3}\PY{o}{+}\PY{n}{c3}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}
+\PY{n}{r1} \PY{o}{=} \PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{s}\PY{o}{\PYZhy{}}\PY{n}{a3}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{s}\PY{o}{\PYZhy{}}\PY{n}{b3}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{n}{s}\PY{o}{\PYZhy{}}\PY{n}{c3}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{s}\PY{p}{)}\PY{p}{)}
+\PY{n}{r} \PY{o}{=} \PY{n}{ma}\PY{o}{.}\PY{n}{pow}\PY{p}{(}\PY{n}{r1}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El radio del círculo inscrito es: }\PY{l+s+si}{\PYZob{}}\PY{n}{r}\PY{l+s+si}{:}\PY{l+s+s2}{2.6}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El lado a mide: 42.6959
+El lado b mide: 30.6171
+El lado c mide: 40.687
+El radio del círculo inscrito es: 10.3925
+    \end{Verbatim}
+
+    E.4 Muestre que \[
+\lim_{x \rightarrow \frac{\pi}{3}} \dfrac{\sin(x- \frac{\pi}{3})}{4 \cos^2(x)-1}
+\] Para hacer esto primero cree un vector \(x\) que tenga los elementos
+\(\pi / 3 -0.1\),\(\pi / 3 - 0.01\),\(\pi / 3 - 0.0001\),\(\pi / 3 + 0.0001\),\(\pi / 3 + 0.01\),\(\pi / 3 + 0.1\).Luego,
+cree un nuevo vector \(y\) en el cual cada elemento es determiando a
+partir de los elementos de \(x\) por \[
+\dfrac{\sin(x- \frac{\pi}{3})}{4 \cos^2(x)-1}
+\] Compare los elementos de \(y\) con el valor \(\dfrac{- \sqrt{3}}{6}\)
+calculando el error absoluto.\textbackslash{}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{3}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.1}\PY{p}{,}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.0001}\PY{p}{,}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{0.0001}\PY{p}{,}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{0.01}\PY{p}{,}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{+}\PY{l+m+mf}{0.1}\PY{p}{]}\PY{p}{)}
+\PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi}\PY{o}{/}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Los valores de x son:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Los valores de y son:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+\PY{n}{errabs4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{fabs}\PY{p}{(}\PY{n}{y}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{ma}\PY{o}{.}\PY{n}{pow}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El error absoluto es: }\PY{l+s+si}{\PYZob{}}\PY{n}{errabs4}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Como podemos ver, mientras mas nos acercamos hacia donde tiende la x, el error absoluto con el valor dado disminuye, por lo que el limite tiende a ese valor}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Los valores de x son: [0.94719755 1.03719755 1.04709755 1.04729755 1.05719755
+1.14719755]
+Los valores de y son: [[-0.2742384  -0.28703233 -0.28865847 -0.2886918
+-0.29036605 -0.30796439]]
+El error absoluto es: [[1.44367362e-02 1.64280282e-03 1.66642616e-05
+1.66690728e-05
+  1.69091944e-03 1.92892523e-02]]
+Como podemos ver, mientras mas nos acercamos hacia donde tiende la x, el error
+absoluto con el valor dado disminuye, por lo que el limite tiende a ese valor
+    \end{Verbatim}
+
+    E.5 Muestre que la suma de la serie infinita \[
+\sum_{n=1}^{\infty} \dfrac{n^2}{2^n}
+\] converge a 6. Haga esto calculando: \[
+a)~~\sum_{n=1}^{5} \dfrac{n^2}{2^n}~~~~~b)~~\sum_{n=1}^{15} \dfrac{n^2}{2^n}~~~~~c)~~\sum_{n=1}^{30} \dfrac{n^2}{2^n}
+\] Para hacer esto, para cada inciso cree un vector \(n\) en el cual el
+primer elemento sea 1, el incremento sea 1 y el ultimo termino sea 5,15
+ó 30. Luego, use las operaciones elemento a elemento para crear un
+vector cuyos elementos sean \(\frac{n^2}{2n}\). Finalmente, use sum para
+sumar los términos de la serie . Compare los valores obtenidos en los
+incisos a), b), c) con el valor de 6 al calcular el error absoluto.
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{177}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+\PY{n}{t\PYZus{}n} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{t\PYZus{}n} \PY{o}{=} \PY{p}{(}\PY{n}{t\PYZus{}n}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{t\PYZus{}n}\PY{p}{)}
+\PY{n}{approx} \PY{o}{=} \PY{n}{t\PYZus{}n}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{La aproximación de 6 con }\PY{l+s+si}{\PYZob{}}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ terminos de la suma es: }\PY{l+s+si}{\PYZob{}}\PY{n}{approx}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El error absoluto es: }\PY{l+s+si}{\PYZob{}}\PY{n}{np}\PY{o}{.}\PY{n}{fabs}\PY{p}{(}\PY{n}{approx} \PY{o}{\PYZhy{}} \PY{l+m+mi}{6}\PY{p}{)}\PY{l+s+si}{:}\PY{l+s+s2}{2.16f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{n1} \PY{o}{=} \PY{l+m+mi}{15}
+\PY{n}{t\PYZus{}n1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n1}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{t\PYZus{}n1} \PY{o}{=} \PY{p}{(}\PY{n}{t\PYZus{}n1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{t\PYZus{}n1}\PY{p}{)}
+\PY{n}{approx1} \PY{o}{=} \PY{n}{t\PYZus{}n1}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{La aproximación de 6 con }\PY{l+s+si}{\PYZob{}}\PY{n}{n1}\PY{o}{+}\PY{l+m+mi}{1}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ terminos de la suma es: }\PY{l+s+si}{\PYZob{}}\PY{n}{approx1}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El error absoluto es: }\PY{l+s+si}{\PYZob{}}\PY{n}{np}\PY{o}{.}\PY{n}{fabs}\PY{p}{(}\PY{n}{approx1} \PY{o}{\PYZhy{}} \PY{l+m+mi}{6}\PY{p}{)}\PY{l+s+si}{:}\PY{l+s+s2}{2.16f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n}{n2} \PY{o}{=} \PY{l+m+mi}{30}
+\PY{n}{t\PYZus{}n2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n}{n2}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+\PY{n}{t\PYZus{}n2} \PY{o}{=} \PY{p}{(}\PY{n}{t\PYZus{}n2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{o}{*}\PY{n}{t\PYZus{}n2}\PY{p}{)}
+\PY{n}{approx2} \PY{o}{=} \PY{n}{t\PYZus{}n2}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{La aproximación de 6 con }\PY{l+s+si}{\PYZob{}}\PY{n}{n2}\PY{o}{+}\PY{l+m+mi}{1}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{ terminos de la suma es: }\PY{l+s+si}{\PYZob{}}\PY{n}{approx2}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+sa}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El error absoluto es: }\PY{l+s+si}{\PYZob{}}\PY{n}{np}\PY{o}{.}\PY{n}{fabs}\PY{p}{(}\PY{n}{approx2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{6}\PY{p}{)}\PY{l+s+si}{:}\PY{l+s+s2}{2.16f}\PY{l+s+si}{\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Como podemos ver, mientras más terminos de la sucesion consideremos, el error absoluto con respeto a 6, irá disminuyendo, por lo que la serie converge a 6.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+La aproximación de 6 con 6 terminos de la suma es: 4.40625
+El error absoluto es: 1.5937500000000000
+La aproximación de 6 con 16 terminos de la suma es: 5.991119384765625
+El error absoluto es: 0.0088806152343750
+La aproximación de 6 con 31 terminos de la suma es: 5.9999990444630384
+El error absoluto es: 0.0000009555369616
+Como podemos ver, mientras más terminos de la sucesion consideremos, el error
+absoluto con respeto a 6, irá disminuyendo, por lo que la serie converge a 6.
+    \end{Verbatim}
+
+    E.6 Cree las siguientes tres matrices: \[
+    A = \begin{pmatrix}
+        5 & -3 & 7 \\
+        1 & 0 & -6 \\
+        -4 & 8 & 9
+    \end{pmatrix}\quad
+    B = \begin{pmatrix}
+        3 & 2 & -1 \\
+        6 & 8 & -7 \\
+        4 & 4 & 0
+    \end{pmatrix}\quad
+    C = \begin{pmatrix}
+        -9 & 8 & 3 \\
+        1 & 7 & -5 \\
+        3 & 3 & 6
+    \end{pmatrix}
+\]
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Calcule \(A+B\) y \(B+A\) para mostrar que la suma de matrices es
+  conmutativa
+\item
+  Calcule \(A+(B+C)\) y \((A+B)+C\) para mostrar que la suma de matrices
+  asociativa
+\item
+  Calcule \(5(A+C)\) y \(5A+5C\) para mostrar que la multiplicación por
+  un escalar es distributiva.
+\item
+  Calcule \(A(B+C)\) y \(AB+AC\), para mostrar que la multiplicación de
+  matrices es distributiva.
+\item
+  ¿Se cumple que \(AB = BA\)?
+\end{enumerate}
+
+    \begin{tcolorbox}[breakable, size=fbox, boxrule=1pt, pad at break*=1mm,colback=cellbackground, colframe=cellborder]
+\prompt{In}{incolor}{107}{\boxspacing}
+\begin{Verbatim}[commandchars=\\\{\}]
+\PY{n}{A} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\PY{n}{B} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{7}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{9}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{7}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a):A+B}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{A}\PY{o}{+}\PY{n}{B}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a):B+A}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{B}\PY{o}{+}\PY{n}{A}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b):A+(B+C)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{A}\PY{o}{+}\PY{p}{(}\PY{n}{B}\PY{o}{+}\PY{n}{C}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b):(A+B)+C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{p}{(}\PY{n}{A}\PY{o}{+}\PY{n}{B}\PY{p}{)}\PY{o}{+}\PY{n}{C}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c):5(A+C)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{5}\PY{o}{*}\PY{p}{(}\PY{n}{A}\PY{o}{+}\PY{n}{C}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c):5A+5C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{A}\PY{o}{+}\PY{l+m+mi}{5}\PY{o}{*}\PY{n}{C}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d):A(B+C)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{A}\PY{o}{@}\PY{p}{(}\PY{n}{B}\PY{o}{+}\PY{n}{C}\PY{p}{)}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d):AB+AC}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{A}\PY{n+nd}{@B}\PY{o}{+}\PY{n}{A}\PY{n+nd}{@C}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e):AB}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{A}\PY{n+nd}{@B}\PY{p}{)}
+\PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e):BA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{n}{B}\PY{n+nd}{@A}\PY{p}{)}
+\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{No se cumple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+\end{tcolorbox}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+a):A+B
+[[  8  -1   6]
+ [  7   8 -13]
+ [  0  12   9]]
+a):B+A
+[[  8  -1   6]
+ [  7   8 -13]
+ [  0  12   9]]
+b):A+(B+C)
+[[ -1   7   9]
+ [  8  15 -18]
+ [  3  15  15]]
+b):(A+B)+C
+[[ -1   7   9]
+ [  8  15 -18]
+ [  3  15  15]]
+c):5(A+C)
+[[-20  25  50]
+ [ 10  35 -55]
+ [ -5  55  75]]
+c):5A+5C
+[[-20  25  50]
+ [ 10  35 -55]
+ [ -5  55  75]]
+d):A(B+C)
+[[ -2  54  88]
+ [-48 -32 -34]
+ [143 143 -50]]
+d):AB+AC
+[[ -2  54  88]
+ [-48 -32 -34]
+ [143 143 -50]]
+e):AB
+[[ 25  14  16]
+ [-21 -22  -1]
+ [ 72  92 -52]]
+e):BA
+[[ 21 -17   0]
+ [ 66 -74 -69]
+ [ 24 -12   4]]
+No se cumple
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+\end{document}

@@ -1,0 +1,244 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.6) (preloaded format=pdflatex 2021.9.21)  11 OCT 2021 21:03
+entering extended mode
+**./Ejercicio02.tex
+(Ejercicio02.tex
+LaTeX2e <2021-06-01>
+L3 programming layer <2021-06-01>
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/base\report.cls
+Document Class: report 2021/02/12 v1.4n Standard LaTeX document class
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo
+File: size10.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count182
+\c@chapter=\count183
+\c@section=\count184
+\c@subsection=\count185
+\c@subsubsection=\count186
+\c@paragraph=\count187
+\c@subparagraph=\count188
+\c@figure=\count189
+\c@table=\count190
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+)
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.sty
+Package: babel 2021/06/02 3.60 The Babel package
+
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/generic/babel\babel.def
+File: babel.def 2021/06/02 3.60 Babel common definitions
+\babel@savecnt=\count191
+\U@D=\dimen139
+\l@unhyphenated=\language79
+
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/generic/babel\txtbabel.def)
+\bbl@readstream=\read2
+)
+\bbl@dirlevel=\count192
+
+*************************************
+* Local config file bblopts.cfg used
+*
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/arabi\bblopts.cfg
+File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
+ babel
+)
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/babel-spanish\spanish.l
+df
+Language: spanish.ldf 2021/05/27 v5.0q Spanish support from the babel system
+\es@quottoks=\toks18
+\es@quotdepth=\count193
+Package babel Info: Making " an active character on input line 570.
+)) (C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.sty
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/l3keys2e\l3k
+eys2e.sty
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+Package: expl3 2021-06-01 L3 programming layer (loader) 
+
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def
+File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count194
+\l__pdf_internal_box=\box50
+))
+Package: l3keys2e 2021-06-01 LaTeX2e option processing using LaTeX3 keys
+)
+Package: lipsum 2021-08-01 v2.5 150 paragraphs of Lorem Ipsum dummy text
+\g__lipsum_par_int=\count195
+\l__lipsum_a_int=\count196
+\l__lipsum_b_int=\count197
+
+(C:\Users\andre\AppData\Local\Programs\MiKTeX\tex/latex/lipsum\lipsum.ltd.tex))
+(Ejercicio02.aux
+LaTeX Info: Redefining \. on input line 5.
+LaTeX Info: Redefining \% on input line 5.
+ (CapitulosE2/Capitulo1.aux) (CapitulosE2/Capitulo2.aux)
+(CapitulosE2/Capitulo3.aux))
+\openout1 = `Ejercicio02.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 9.
+LaTeX Font Info:    ... okay on input line 9.
+LaTeX Info: Redefining \. on input line 9.
+LaTeX Info: Redefining \% on input line 9.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 10.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 10.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 10.
+ [1
+
+{C:/Users/andre/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] (Ejercicio02.to
+c
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+)
+\tf@toc=\write3
+\openout3 = `Ejercicio02.toc'.
+
+ [1
+
+]
+\openout2 = `CapitulosE2/Capitulo1.aux'.
+
+ (CapitulosE2/Capitulo1.tex [2
+
+
+]
+Overfull \hbox (13.63597pt too wide) in paragraph at lines 5--6
+ \OT1/cmr/bx/n/10 Maqui-na[] []\OT1/cmtt/m/n/10 Nam dui ligula, fringilla a, e
+uismod sodales, sollicitudin
+ []
+
+
+Overfull \hbox (1.49698pt too wide) in paragraph at lines 5--6
+\OT1/cmtt/m/n/10 vel, wisi. Morbi auctor lorem non justo. Nam lacus libero, pre
+tium
+ []
+
+
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 5--6
+\OT1/cmtt/m/n/10 at, lobortis vitae, ultricies et, tellus. Donec aliquet, torto
+r sed
+ []
+
+
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 5--6
+\OT1/cmtt/m/n/10 accumsan bibendum, erat ligula aliquet magna, vitae ornare odi
+o metus
+ []
+
+
+Overfull \hbox (6.74693pt too wide) in paragraph at lines 5--6
+\OT1/cmtt/m/n/10 a mi. Morbi ac orci et nisl hendrerit mollis. Suspendisse ut m
+assa.
+ []
+
+
+Overfull \hbox (11.99689pt too wide) in paragraph at lines 5--6
+\OT1/cmtt/m/n/10 Cras nec ante. Pellentesque a nulla. Cum sociis natoque penati
+bus et
+ []
+
+
+Overfull \hbox (27.74675pt too wide) in paragraph at lines 5--6
+\OT1/cmtt/m/n/10 magnis dis parturient montes, nascetur ridiculus mus. Aliquam 
+tincidunt
+ []
+
+
+Overfull \hbox (17.24684pt too wide) in paragraph at lines 5--6
+\OT1/cmtt/m/n/10 urna. Nulla ullamcorper vestibulum turpis. Pellentesque cursus
+ luctus
+ []
+
+) [3]
+\openout2 = `CapitulosE2/Capitulo2.aux'.
+
+ (CapitulosE2/Capitulo2.tex [4
+
+
+
+
+])
+Overfull \hbox (2.59409pt too wide) in paragraph at lines 7--13
+ \OT1/cmr/bx/n/24.88 Huge[] \OT1/cmr/m/n/24.88 Su-spen-disse vel fe-lis. Ut lo-
+
+ []
+
+
+Overfull \hbox (10.79268pt too wide) in paragraph at lines 7--13
+\OT1/cmr/m/n/24.88 nec eu pu-rus. Quis-que ve-hi-cula, urna
+ []
+
+
+Overfull \hbox (0.10602pt too wide) in paragraph at lines 7--13
+\OT1/cmr/m/n/24.88 sed ul-tri-cies auc-tor, pede lo-rem ege-
+ []
+
+
+Overfull \hbox (8.78697pt too wide) in paragraph at lines 7--13
+\OT1/cmr/m/n/24.88 nunc. Ali-quam do-lor odio, com-modo
+ []
+
+
+Overfull \hbox (22.69489pt too wide) in paragraph at lines 7--13
+\OT1/cmr/m/n/24.88 fer-men-tum fau-ci-bus, ege-stas vel, odio. 
+ []
+
+[5] [6]
+\openout2 = `CapitulosE2/Capitulo3.aux'.
+
+ (CapitulosE2/Capitulo3.tex [7
+
+
+
+
+]) [8] (Ejercicio02.aux
+LaTeX Info: Redefining \. on input line 5.
+LaTeX Info: Redefining \% on input line 5.
+
+(CapitulosE2/Capitulo1.aux) (CapitulosE2/Capitulo2.aux)
+(CapitulosE2/Capitulo3.aux)) ) 
+Here is how much of TeX's memory you used:
+ 2036 strings out of 478864
+ 35892 string characters out of 2848660
+ 434940 words of memory out of 3000000
+ 19968 multiletter control sequences out of 15000+600000
+ 409720 words of font info for 48 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 70i,7n,81p,244b,361s stack positions out of 5000i,500n,10000p,200000b,80000s
+<C:/Users/andre/AppData/Local/Programs/MiKTeX/fon
+ts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Users/andre/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/andre/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx5.pfb><C:/Users/andre/AppData
+/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/andre
+/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Use
+rs/andre/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr17.pfb
+><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/c
+mr5.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmti10.pfb><C:/Users/andre/AppData/Local/Programs/MiKTeX/fonts/type1/publ
+ic/amsfonts/cm/cmtt10.pfb>
+Output written on Ejercicio02.pdf (9 pages, 146593 bytes).
+PDF statistics:
+ 77 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

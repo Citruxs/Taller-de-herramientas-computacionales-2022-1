@@ -1,0 +1,86 @@
+\documentclass{book}
+\usepackage[spanish,mexico]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+\usepackage{amsthm} % Ambientes para teoremas
+
+\newtheorem{teo}{Teorema}[chapter]
+\newtheorem{coro}{Corolario}[teo]
+
+\theoremstyle{definition}
+\newtheorem{defi}{Definición}[section]
+\newtheorem{ejem}[defi]{Ejemplo}
+
+\theoremstyle{remark}
+\newtheorem*{obs}{Observación}
+
+\title{Ejemplo 10}
+\author{Jorge Zavaleta}
+\date{Octubre 2021}
+
+\begin{document}
+\frontmatter
+\maketitle
+
+\tableofcontents
+\mainmatter
+\chapter{Teoremas}
+
+\begin{teo}
+    Aquí pongo mi teorema
+\end{teo}
+
+\begin{teo}[Nombre del teorema]
+    Aquí pongo mi teorema
+\end{teo}
+
+\section{Definiciones}
+
+\begin{defi}
+    Aquí pongo la definición
+\end{defi}
+
+\begin{defi}
+    Aquí pongo la definición
+\end{defi}
+
+\section{Definiciones y teoremas}
+\begin{defi}
+    Aquí pongo la definición
+\end{defi}
+
+\begin{teo}
+    Aquí pongo mi teorema
+\end{teo}
+
+\chapter{Teoremas}
+
+\begin{teo}
+    Aquí pongo mi teorema
+\end{teo}
+
+\begin{teo}[Nombre del teorema]
+    Aquí pongo mi teorema
+\end{teo}
+
+\begin{coro}
+    Aquí pongo mi corolario
+\end{coro}
+
+\begin{coro}
+    Aquí pongo mi corolario
+\end{coro}
+
+\begin{teo}[Nombre del teorema]
+    Aquí pongo mi teorema
+\end{teo}
+
+\begin{coro}
+    Aquí pongo mi corolario
+\end{coro}
+
+\begin{obs}
+    Aquí pongo una observación
+\end{obs}
+
+\end{document}
